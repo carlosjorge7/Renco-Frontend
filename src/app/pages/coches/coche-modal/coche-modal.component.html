@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-icon color="danger" (click)="closeModal()" size="large" name="close-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title> {{isUpdate ? 'Editar' : 'Nuevo'}} Coche</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-item>
+      <ion-label position="floating">Matrícula</ion-label>
+      <ion-input [(ngModel)]="data.matricula" name="matricula"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Marca</ion-label>
+      <ion-input [(ngModel)]="data.marca" name="marca"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Color</ion-label>
+      <ion-input [(ngModel)]="data.color" name="color"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Número de km</ion-label>
+      <ion-input [(ngModel)]="data.km" name="km"></ion-input>
+    </ion-item>
+    <ion-button type="submit" fill="outline" expand="block" color="primary" class="ion-margin-top">{{isUpdate ? 'Editar' : 'Guardar'}}</ion-button>
+  </form>
+</ion-content>

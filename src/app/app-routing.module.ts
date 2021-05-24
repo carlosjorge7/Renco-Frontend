@@ -7,10 +7,26 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'clientes',
+    loadChildren: () => import('./pages/clientes/clientes.module').then( m => m.ClientesPageModule)
+  },
+  {
+    path: 'coches',
+    loadChildren: () => import('./pages/coches/coches.module').then( m => m.CochesPageModule)
+  },
+  {
+    path: 'contratos',
+    loadChildren: () => import('./pages/contratos/contratos.module').then( m => m.ContratosPageModule)
+  },
+  {
+    path: 'balances',
+    loadChildren: () => import('./pages/balances/balances.module').then( m => m.BalancesPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({

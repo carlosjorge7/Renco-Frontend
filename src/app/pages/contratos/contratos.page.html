@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <p>Total: {{ total }}€</p>
+      <ion-icon size="large" (click)="createRegistro()" name="add-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title> Contratos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-searchbar animated placeholder="Buscar" (ionChange)="buscarRegistro($event)"></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!-- Skeleton -->
+        <ion-list *ngIf="registros.length === 0">
+          <ion-item *ngFor="let registro of registros">
+            <ion-label>
+              <ion-skeleton-text width="40%"></ion-skeleton-text>
+              <ion-skeleton-text width="80%"></ion-skeleton-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="registros.length !== 0">
+          <ion-item-sliding *ngFor="let registro of registros | filtroRegistros: textoBuscar">
+            <ion-item (click)="updateRegistro(registro)">
+              <ion-avatar slot="start">
+                <div class="avatar">
+                  {{registro.precio}}
+                </div>
+              </ion-avatar>
+              <ion-label>
+                 <h3 class="title">{{ registro.nombre + ' -> ' + registro.marca  }}</h3>
+                 <h3 style="display: none;" class="title">{{ registro.idCliente + ' -> ' + registro.idCoche  }}</h3>
+                 <p class="subtext">{{'Fecha de contratación: ' + registro.fechaInicio}}</p> 
+                 <p class="subtext">{{'Fecha de finalización: ' + registro.fechaFin }}</p>
+                 <p class="subtext">{{ 'Total: ' + registro.precio + '€' }}</p> 
+              </ion-label>
+            </ion-item>
+            <ion-item-options slot="end">
+              <ion-item-option color="danger" (click)="deleteRegistro(registro.idRegistro)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="success" (click)="updateRegistro(registro)">
+                <ion-icon name="pencil"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

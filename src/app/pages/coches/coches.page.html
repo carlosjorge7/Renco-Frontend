@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <ion-icon size="large" (click)="createCoche()" name="add-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title> Coches</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar animated placeholder="Buscar" (ionChange)="buscarCoche($event)"></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!-- Skeleton -->
+        <ion-list *ngIf="coches.length === 0">
+          <ion-item *ngFor="let coche of coches">
+            <ion-label>
+              <ion-skeleton-text width="40%"></ion-skeleton-text>
+              <ion-skeleton-text width="80%"></ion-skeleton-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="coches.length !== 0">
+          <ion-item-sliding *ngFor="let coche of coches | filtroCoches: textoBuscar ">
+            <ion-item (click)="updateCoche(coche)">
+              <ion-avatar slot="start">
+                <div class="avatar">
+                  {{coche.marca.substring(0, 1).toUpperCase() + coche.marca.substring(1,2)}}
+                </div>
+              </ion-avatar>
+              <ion-label>
+                <h3 class="title">{{coche.marca}}</h3>
+                <p class="subtext">{{ 'Matrícula: ' + coche.matricula + ' Color: ' + coche.color + ' Km: ' + coche.km}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item-options slot="end">
+              <ion-item-option color="danger" (click)="deleteCoche(coche.idCoche)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="success" (click)="updateCoche(coche)">
+                <ion-icon name="pencil"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

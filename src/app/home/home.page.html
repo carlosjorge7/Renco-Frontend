@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar  color="light">
     <ion-title>
-      Blank
+      <img src="../assets/logo.png" alt="">
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Welcome to Renco!</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Renco es la aplicación para gestionar los contratos de renting y leasing que tu empresa necesita!
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title>Es muy fácil de usar!</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Para hacer el primer paso, añade los vehiculos que gestionas internamente.
+      Has encontrado un cliente ya para tu(s) vehiculo? Guardalo en la sección de clientes.
+      Finalmente, gestiona tu primer contrato añadiendo el coche con el cliente que quieras.
+      Ya esta! Asi de fácil!
+    </ion-card-content>
+  </ion-card>
 </ion-content>

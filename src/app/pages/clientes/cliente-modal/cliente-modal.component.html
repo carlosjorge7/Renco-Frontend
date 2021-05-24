@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-icon color="danger" (click)="closeModal()" size="large" name="close-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title> {{isUpdate ? 'Editar' : 'Nuevo'}} Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="data.nombre" name="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dni</ion-label>
+      <ion-input [(ngModel)]="data.dni" name="dni"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input [(ngModel)]="data.edad" name="edad"></ion-input>
+    </ion-item>
+    <ion-button type="submit" fill="outline" expand="block" color="primary" class="ion-margin-top">{{isUpdate ? 'Editar' : 'Guardar'}}</ion-button>
+  </form>
+</ion-content>

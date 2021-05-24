@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <ion-icon size="large" (click)="createCliente()" name="add-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title> Clientes</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-searchbar animated placeholder="Buscar" (ionChange)="buscarCliente($event)"></ion-searchbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <!-- Skeleton -->
+        <ion-list *ngIf="clientes.length === 0">
+          <ion-item *ngFor="let cliente of clientes">
+            <ion-label>
+              <ion-skeleton-text width="40%"></ion-skeleton-text>
+              <ion-skeleton-text width="80%"></ion-skeleton-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="clientes.length !== 0">
+          <ion-item-sliding *ngFor="let cliente of clientes | filtroClientes: textoBuscar">
+            <ion-item (click)="updateCliente(cliente)">
+              <ion-avatar slot="start">
+                <div class="avatar">
+                  {{cliente.nombre.substring(0, 1).toUpperCase()}}
+                </div>
+              </ion-avatar>
+              <ion-label>
+                <h3 class="title">{{cliente.nombre}}</h3>
+                <p class="subtext">{{ 'Dni: ' + cliente.dni + ' Edad: ' + cliente.edad}}</p>
+              </ion-label>
+            </ion-item>
+            <ion-item-options slot="end">
+              <ion-item-option color="danger" (click)="deleteCliente(cliente.idCliente)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-item-option>
+              <ion-item-option color="success" (click)="updateCliente(cliente)">
+                <ion-icon name="pencil"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

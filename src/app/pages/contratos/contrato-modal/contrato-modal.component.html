@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="end">
+      <ion-icon color="danger" (click)="closeModal()" size="large" name="close-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title> {{isUpdate ? 'Editar' : 'Nuevo'}} Contrato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)"> 
+    <ion-item>
+      <ion-label position="floating">Fecha Inicio</ion-label>
+      <ion-input type="date" [(ngModel)]="data.fechaInicio" name="fechaInicio"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Fecha Fin</ion-label>
+      <ion-input type="date" [(ngModel)]="data.fechaFin" name="fechaFin"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input [(ngModel)]="data.precio" name="precio"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descuento</ion-label>
+      <ion-input [(ngModel)]="data.descuento" name="descuento"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Compra</ion-label>
+      <ion-input [(ngModel)]="data.compra" name="compra"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>-- Selecciona un coche</ion-label>
+      <ion-select [compareWith]="compareWith" (ionChange)="selectCoche($event)">
+        <ion-select-option  [(ngModel)]="data.idCoche" name="idCoche" *ngFor="let coche of coches" [value]="coche.idCoche">{{coche.matricula + '-' + coche.marca}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>-- Selecciona un cliente</ion-label>
+      <ion-select [compareWith]="compareWith" (ionChange)="selectCliente($event)">
+        <ion-select-option [(ngModel)]="data.idCliente" name="idCliente" *ngFor="let cliente of clientes" [value]="cliente.idCliente">{{cliente.nombre + '-' + cliente.dni}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button  type="submit" fill="outline" expand="block" color="primary" class="ion-margin-top">{{isUpdate ? 'Editar' : 'Guardar'}}</ion-button>
+  </form>
+</ion-content>
