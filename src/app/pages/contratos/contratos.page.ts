@@ -4,6 +4,8 @@ import { Registro } from '../../modelos/Registro';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ContratoModalComponent } from './contrato-modal/contrato-modal.component';
 
+import jsPDF from 'jspdf';
+
 @Component({
   selector: 'app-contratos',
   templateUrl: './contratos.page.html',
@@ -23,6 +25,29 @@ export class ContratosPage implements OnInit {
 
   ngOnInit() {
     this.getAllRegistros();
+  }
+
+
+  exportPdf(registro: Registro) {
+    console.log(registro)
+    const esp = '                                                                      ';
+    const line = '__________________________________________________________________________________________________________________________';
+    const Y = 30;
+    const doc = new jsPDF()
+    doc.addImage('assets/logo.png', 'PNG', 160, 10, 27, 7);
+    doc.setFontSize(16)
+    doc.text(`Contrato #${registro.idRegistro}`, 10, Y+40);
+    doc.setFontSize(13)
+    doc.text(`Cliente: ${registro.nombre} ${esp} Dni/NIE: ${registro.dni}`, 10, Y+50)
+    doc.text(`Coche: ${registro.marca} ${esp} Matrícula: ${registro.matricula}`, 10, Y+60)
+    doc.text(`Fecha Inicio: ${registro.fechaInicio}`, 10, Y+70)
+    doc.text(`Fecha Fin ${registro.fechaFin}`, 10, Y+80)
+    doc.text(`Compra: ${registro.compra} ${esp} Dcto: ${registro.descuento}%`, 10, Y+90)
+    doc.text(`${esp.substring(0, esp.length/2)}${esp} Total: ${registro.precio}€`, 10, Y+110);
+    doc.setFontSize(8);
+    doc.text(line, 10, Y+150);
+    doc.text('Gracias por depositar tu confianza en nosotros para gestionar los contratos de renting de tus clientes. Juntos, por el cambio y la innovación', 10, Y+160)
+    doc.save(`Contrato_${registro.idRegistro}_${registro.nombre}.pdf`)
   }
 
   buscarRegistro(event) {
